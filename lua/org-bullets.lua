@@ -209,8 +209,12 @@ local function setup_markers()
       local highlight = org_headline_hl .. level
       return { symbol, highlight }
     end,
-    -- Checkboxes [x]
+    -- List checkboxes '- [x]'
     ["^\\s*\\-\\s\\[\\zsx\\ze\\]"] = function(_)
+      return { "✓", "OrgDone" }
+    end,
+    -- Numbered checkboxes '1. [x]'
+    ["^\\s*\\d\\+\\.\\s\\[\\zsX\\ze\\]"] = function(_)
       return { "✓", "OrgDone" }
     end,
     -- List bullets *,+,- (or as configured by the user)
