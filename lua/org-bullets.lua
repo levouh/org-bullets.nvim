@@ -213,9 +213,17 @@ local function setup_markers()
     ["^\\s*\\-\\s\\[\\zsx\\ze\\]"] = function(_)
       return { "✓", "OrgDone" }
     end,
+    -- List partial checkboxes '- [-]'
+    ["^\\s*\\-\\s\\[\\zs\\-\\ze\\]"] = function(_)
+      return { "~", "OrgDone" }
+    end,
     -- Numbered checkboxes '1. [x]'
-    ["^\\s*\\d\\+\\.\\s\\[\\zsX\\ze\\]"] = function(_)
+    ["^\\s*\\d\\+\\.\\s\\[\\zsx\\ze\\]"] = function(_)
       return { "✓", "OrgDone" }
+    end,
+    -- Numbered partial checkboxes '1. [-]'
+    ["^\\s*\\d\\+\\.\\s\\[\\zs-\\ze\\]"] = function(_)
+      return { "~", "OrgDone" }
     end,
     -- List bullets *,+,- (or as configured by the user)
     ["^\\s*[" .. config.bullet_chars .. "]\\s"] = function(str)
